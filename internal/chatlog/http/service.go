@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gin-contrib/cors"
+
 	"github.com/sjzar/chatlog/internal/chatlog/ctx"
 	"github.com/sjzar/chatlog/internal/chatlog/database"
 	"github.com/sjzar/chatlog/internal/chatlog/mcp"
@@ -41,6 +43,7 @@ func NewService(ctx *ctx.Context, db *database.Service, mcp *mcp.Service) *Servi
 		errors.RecoveryMiddleware(),
 		errors.ErrorHandlerMiddleware(),
 		gin.LoggerWithWriter(log.Logger),
+		cors.Default(),
 	)
 
 	s := &Service{
